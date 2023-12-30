@@ -107,6 +107,7 @@ alias la="exa -la"
 alias cat="bat"
 alias pbcopy="xclip -sel clip"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
+alias cm="chezmoi"
 
 
 # accept the command suggested by zsh-autosuggestions be pressing CTRL + f
