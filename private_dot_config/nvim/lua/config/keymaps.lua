@@ -2,6 +2,13 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+--- kitty nav
+-- check if kitty terminal is running
+vim.keymap.set({ "n", "x" }, "<C-h>", ":KittyNavigateLeft<cr>", { silent = true })
+vim.keymap.set({ "n", "x" }, "<C-l>", ":KittyNavigateRight<cr>", { silent = true })
+vim.keymap.set({ "n", "x" }, "<C-j>", ":KittyNavigateDown<cr>", { silent = true })
+vim.keymap.set({ "n", "x" }, "<C-k>", ":KittyNavigateUp<cr>", { silent = true })
+
 -- flash jump
 vim.keymap.set({ "n", "v" }, "<leader>j", function()
   require("flash").jump()

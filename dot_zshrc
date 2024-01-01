@@ -109,6 +109,7 @@ alias pbcopy="xclip -sel clip"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 alias cm="chezmoi"
 alias vimdiff='nvim -d'
+alias kssh='kitten ssh'
 
 # accept the command suggested by zsh-autosuggestions be pressing CTRL + f
 bindkey '^f' autosuggest-accept
@@ -225,4 +226,3 @@ fi
 
 
 eval $(thefuck --alias)
-# edit
