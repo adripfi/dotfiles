@@ -106,10 +106,11 @@ alias ll="exa -l"
 alias la="exa -la"
 alias cat="bat"
 alias pbcopy="xclip -sel clip"
-alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
+alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
 alias cm="chezmoi"
 alias vimdiff='nvim -d'
 alias kssh='kitten ssh'
+alias tt="gio trash"
 
 # accept the command suggested by zsh-autosuggestions be pressing CTRL + f
 bindkey '^f' autosuggest-accept
@@ -182,26 +183,9 @@ export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SO
 
 
 # ------------ (auto) jump
-eval "$(jump shell zsh)"
+[[ -s /home/adrian/.autojump/etc/profile.d/autojump.sh ]] && source /home/adrian/.autojump/etc/profile.d/autojump.sh
 
-
-__jump_chpwd() {
-  jump chdir
-}
-
-jump_completion() {
-  reply="'$(jump hint "$@")'"
-}
-
-j() {
-  local dir="$(jump cd $@)"
-  test -d "$dir" && cd "$dir"
-}
-
-typeset -gaU chpwd_functions
-chpwd_functions+=__jump_chpwd
-
-compctl -U -K jump_completion j
+	autoload -U compinit && compinit -u
 
 
 
