@@ -49,12 +49,17 @@ if vim.g.vscode then
   end)
 
   -- open/close sidebar
-  vim.keymap.set({ "n", "v" }, "<leader>e", function()
+  vim.keymap.set({ "n", "v" }, "<leader>s", function()
     vscode.action("workbench.action.toggleSidebarVisibility")
   end)
   -- open/close bottom bar
   vim.keymap.set({ "n", "v" }, "<leader>b", function()
     vscode.action("workbench.action.togglePanel")
+  end)
+
+  -- open/close sidebar
+  vim.keymap.set({ "n", "v" }, "<leader>e", function()
+    vscode.action("workbench.files.action.showActiveFileInExplorer")
   end)
 
   -- goto references or list references
