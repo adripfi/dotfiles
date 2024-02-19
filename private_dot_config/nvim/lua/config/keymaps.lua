@@ -15,6 +15,15 @@ if vim.g.vscode then
   vim.g.mapleader = " "
   local vscode = require("vscode-neovim")
 
+  -- comment line using keymap g-c-c
+  vim.keymap.set("n", "gcc", function()
+    vscode.action("editor.action.commentLine")
+  end)
+
+  vim.keymap.set("v", "gc", function()
+    vscode.action("editor.action.commentLine")
+  end)
+
   -- jump between open files
   vim.keymap.set({ "n", "v" }, "H", function()
     vscode.action("workbench.action.previousEditor")
