@@ -111,6 +111,7 @@ alias cm="chezmoi"
 alias vimdiff='nvim -d'
 alias kssh='kitten ssh'
 alias tt="gio trash"
+alias cls="clear"
 
 # accept the command suggested by zsh-autosuggestions be pressing CTRL + f
 bindkey '^f' autosuggest-accept
