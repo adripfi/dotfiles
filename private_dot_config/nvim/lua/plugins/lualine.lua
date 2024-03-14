@@ -1,7 +1,7 @@
 local colors = {
   blue = "#89B4FA",
   cyan = "#94E2D5",
-  black = "#151520",
+  black = "#1E1E2E",
   white = "#BAC2DE",
   red = "#F38BA8",
   violet = "#CBA6F7",
