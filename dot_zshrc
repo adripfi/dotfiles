@@ -135,7 +135,7 @@ export LC_COLLATE="C" # hidden files on top
 
 # preview
 export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
-export NNN_PLUG='p:preview-tui;d:dragdrop;j:autojump;c:!echo $PWD/$nnn | xclip -sel clip*' # many other plugins are available here: https://github.com/jarun/nnn/tree/master/plugins
+export NNN_PLUG='p:preview-tui;d:dragdrop;j:autojump;c:!echo $PWD/$nnn |  tr -d "\n" | xclip -sel clip*' # many other plugins are available here: https://github.com/jarun/nnn/tree/master/plugins
 export NNN_SPLIT='v' # to split Kitty vertically
 
 # use system trash instead of rm
