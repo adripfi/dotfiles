@@ -10,7 +10,22 @@ vim.keymap.set({ "n", "v" }, "<leader>t", function()
   require("flash").treesitter()
 end)
 
---vscode keymas
+--- yanky
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+
+vim.keymap.set("n", "<leader>p", "<Plug>(YankyPreviousEntry)")
+vim.keymap.set("n", "<leader>n", "<Plug>(YankyNextEntry)")
+-- vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
+-- vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
+-- vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
+-- vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
+
+--vscode specfig keymas
 if vim.g.vscode then
   vim.g.mapleader = " "
   local vscode = require("vscode-neovim")
@@ -83,21 +98,6 @@ if vim.g.vscode then
   vim.keymap.set({ "n", "v" }, "<C-S-e>", function()
     vscode.action("workbench.action.splitEditorDown")
   end)
-
-  --- yanky
-  -- vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-  -- vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-  vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-  vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-  vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-  vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-
-  vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
-  vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
-  vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
-  vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
-  vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
-  vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
 
   -- set flash highlight groups
   local hls = {

@@ -128,6 +128,7 @@ def _redraw_tab_bar(_):
 
 
 def get_battery_cells() -> list:
+    return []
     try:
         with open("/sys/class/power_supply/BAT0/status", "r") as f:
             status = f.read()
@@ -164,6 +165,7 @@ def get_battery_cells() -> list:
 
 timer_id = None
 right_status_length = -1
+
 
 def draw_tab(
     draw_data: DrawData,
