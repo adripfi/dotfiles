@@ -50,11 +50,15 @@ return {
       },
       color_overrides = {
         mocha = {
-          base = "#1E1E2E",
-          mantle = "#1E1E2E",
-          crust = "#1E1E2E",
+          base = "#11111b",
+          mantle = "#11111b",
         },
       },
+      custom_highlights = function(colors)
+        return {
+          WinSeparator = { fg = colors.surface0 },
+        }
+      end,
     },
   },
 
