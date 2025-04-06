@@ -10,6 +10,11 @@ vim.keymap.set({ "n", "v" }, "<leader>t", function()
   require("flash").treesitter()
 end)
 
+-- leap
+vim.keymap.set({ "n", "o" }, "s", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "o" }, "S", "<Plug>(leap-backward)")
+vim.keymap.set({ "n", "o" }, "gs", "<Plug>(leap-from-window)")
+
 --- yanky
 vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
@@ -18,17 +23,36 @@ vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
 vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
-vim.keymap.set("n", "<leader>p", "<Plug>(YankyPreviousEntry)")
-vim.keymap.set("n", "<leader>n", "<Plug>(YankyNextEntry)")
+vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
+vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
 -- vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
 -- vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
 -- vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
 -- vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
 
+-- Jump between Python methods using treesitter
+vim.keymap.set("n", "{", function()
+  require("nvim-treesitter.textobjects.move").goto_previous_start({
+    query = "@function.outer",
+    enable = true,
+  })
+end, { desc = "Jump to previous method" })
+
+vim.keymap.set("n", "}", function()
+  require("nvim-treesitter.textobjects.move").goto_next_start({
+    query = "@function.outer",
+    enable = true,
+  })
+end, { desc = "Jump to next method" })
+
 --vscode specfig keymas
 if vim.g.vscode then
   vim.g.mapleader = " "
   local vscode = require("vscode-neovim")
+
+  -- undo/REDO via vscode
+  vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
+  vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
 
   -- comment line using keymap g-c-c
   vim.keymap.set("n", "gcc", function()
@@ -98,6 +122,9 @@ if vim.g.vscode then
   vim.keymap.set({ "n", "v" }, "<C-S-e>", function()
     vscode.action("workbench.action.splitEditorDown")
   end)
+  vim.keymap.set({ "n", "v" }, "go", function()
+    vscode.action("workbench.action.showAllEditors")
+  end)
 
   -- set flash highlight groups
   local hls = {
@@ -117,4 +144,5 @@ else
   vim.keymap.set({ "n", "x" }, "<C-l>", ":KittyNavigateRight<cr>", { silent = true })
   vim.keymap.set({ "n", "x" }, "<C-j>", ":KittyNavigateDown<cr>", { silent = true })
   vim.keymap.set({ "n", "x" }, "<C-k>", ":KittyNavigateUp<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<leader>gp", ":Gitsigns preview_hunk<cr>", { silent = true })
 end
