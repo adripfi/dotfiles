@@ -64,22 +64,6 @@ ignore = [
     "D212",    # Multi-line summary first line
     "PLR0913", # Too many arguments
     "Q000",    # Single quotes found but double quotes preferred
-    "D205",    # 1 blank line required between summary line and description
-    "D213",    # Multi-line docstring summary should start at the second line
-  "D214",    # Section is missing a section title
-  "D215",    # Section underline is over-indented
-  "D210",      # No whitespaces allowed surrounding docstring text
-  "D404",      # First word of the docstring should not be This
-  "D401",      # First line should be in imperative mood
-  "D202",
-  "D410",
-  "D411",
-  "D413",
-  "D200",
-  "SIM108",
-
-
-    
 ]
 ignore-init-module-imports = true
 line-length = 120

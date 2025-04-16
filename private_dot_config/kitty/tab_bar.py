@@ -128,7 +128,6 @@ def _redraw_tab_bar(_):
 
 
 def get_battery_cells() -> list:
-    return []
     try:
         with open("/sys/class/power_supply/BAT0/status", "r") as f:
             status = f.read()
@@ -166,7 +165,6 @@ def get_battery_cells() -> list:
 timer_id = None
 right_status_length = -1
 
-
 def draw_tab(
     draw_data: DrawData,
     screen: Screen,
@@ -184,8 +182,6 @@ def draw_tab(
     clock = datetime.now().strftime(" %H:%M")
     date = datetime.now().strftime(" %d.%m.%Y")
     cells = get_battery_cells()
-    cells.append((clock_color, clock))
-    cells.append((date_color, date))
     right_status_length = RIGHT_MARGIN
     for cell in cells:
         right_status_length += len(str(cell[1]))
