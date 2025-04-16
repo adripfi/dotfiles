@@ -3,12 +3,12 @@
 -- Add any additional keymaps here
 
 -- flash jump
-vim.keymap.set({ "n", "v" }, "<leader>j", function()
-  require("flash").jump()
-end)
-vim.keymap.set({ "n", "v" }, "<leader>t", function()
-  require("flash").treesitter()
-end)
+-- vim.keymap.set({ "n", "v" }, "<leader>j", function()
+--   require("flash").jump()
+-- end)
+-- vim.keymap.set({ "n", "v" }, "<leader>t", function()
+--   require("flash").treesitter()
+-- end)
 
 -- leap
 vim.keymap.set({ "n", "o" }, "s", "<Plug>(leap-forward)")
@@ -92,7 +92,7 @@ if vim.g.vscode then
   -- end)
 
   -- open breadcrumbs/methods overview for navigating between functions or methods found in file
-  vim.keymap.set({ "n", "v" }, "<leader>m", function()
+  vim.keymap.set({ "n", "v" }, "<leader>j", function()
     vscode.action("breadcrumbs.focusAndSelect")
   end)
 
