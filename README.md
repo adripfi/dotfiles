@@ -7,9 +7,23 @@ These tools need to be installed before cloning the dotfiles:
 ### Core Shell Tools
 - zsh
 - brew: https://brew.sh/
-- stow: `brew install stow`
-- xclip: `brew install xclip`
-- gio: `brew install gio`
+- Install all tools at once:
+  ```bash
+  brew install stow xclip gio neovim eza lazygit bat zoxide fzf fd duf thefuck
+  ```
+- Individual installations:
+  - stow: 
+    ```bash
+    brew install stow
+    ```
+  - xclip: 
+    ```bash
+    brew install xclip
+    ```
+  - gio: 
+    ```bash
+    brew install gio
+    ```
 
 ### Shell Enhancement
 - Oh-my-zsh: https://ohmyz.sh/
@@ -28,13 +42,43 @@ These tools need to be installed before cloning the dotfiles:
 - Kitty: https://sw.kovidgoyal.net/kitty/binary/
 
 ### Development Tools
-- Neovim: `brew install neovim`
+- Neovim: 
+  ```bash
+  brew install neovim
+  ```
 - Yazi: https://yazi-rs.github.io/docs/installation#homebrew
-- eza (replaces exa): `brew install eza`
-- lazygit: `brew install lazygit`
-- bat: `brew install bat`
-- zoxide: https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
-- fzf: `brew install fzf`
+- eza (replaces exa): 
+  ```bash
+  brew install eza
+  ```
+- lazygit: 
+  ```bash
+  brew install lazygit
+  ```
+- bat: 
+  ```bash
+  brew install bat
+  ```
+- zoxide: 
+  ```bash
+  brew install zoxide
+  ```
+- fzf: 
+  ```bash
+  brew install fzf
+  ```
+- fd-find:
+  ```bash
+  brew install fd
+  ```
+- duf:
+  ```bash
+  brew install duf
+  ```
+- thefuck:
+  ```bash
+  brew install thefuck
+  ```
 
 ## Installation
 
@@ -71,9 +115,9 @@ The shell configuration includes:
 - karabiner (see .json configs in `karabiner/`)
 - Mamba: https://github.com/conda-forge/miniforge
 
-
 ### GUI Applications
 - Rectangle (Window management): https://github.com/rxhanson/Rectangle
 - Karabiner (Keyboard customization)
+- Scroll Reverser: https://pilotmoon.com/scrollreverser/
 
 
