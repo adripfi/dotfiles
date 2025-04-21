@@ -12,19 +12,15 @@ These tools need to be installed before cloning the dotfiles:
 - gio: `brew install gio`
 
 ### Shell Enhancement
-- Powerlevel10k (don't set it up!): https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
 - Oh-my-zsh: https://ohmyz.sh/
-  - Required plugins:
+  - Required plugins (all installed via single commands):
   ```bash
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-completions.git \
-    ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/powerlevel10k
-  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/powerlevel10k
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
   git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-  ( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
+  git clone https://github.com/chrissicool/zsh-256color ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-256color
   ```
 
 ### Terminal & Fonts
