@@ -1,4 +1,4 @@
 return {
-  "sqlite.lua",
+  "ggandor/leap.nvim",
   vscode = true,
 }

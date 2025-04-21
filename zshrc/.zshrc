@@ -79,6 +79,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-256color zsh-vi-mode)
 
+# setup zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,9 +112,9 @@ source $ZSH/oh-my-zsh.sh
 # Custom aliases
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
-alias ls="exa"
-alias ll="exa -l"
-alias la="exa -la"
+alias ls="eza"
+alias ll="eza -l"
+alias la="eza -la"
 alias cat="bat"
 alias pbcopy="xclip -sel clip"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
@@ -121,6 +125,7 @@ alias tt="gio trash"
 alias c="clear"
 alias cd="z"
 alias ci="zi"
+alias lg="lazygit"
 
 # accept the command suggested by zsh-autosuggestions by pressing CTRL + f
 bindkey '^f' autosuggest-accept
@@ -145,6 +150,12 @@ function y() {
 }
 
 
+export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
+eval "$(zoxide init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/adrian/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -164,11 +175,3 @@ if [ -f "/Users/adrian/miniforge3/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-
-export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
-eval $(thefuck --alias)
-source <(fzf --zsh)
-eval "$(zoxide init zsh)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

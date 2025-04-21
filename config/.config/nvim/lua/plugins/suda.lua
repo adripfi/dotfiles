@@ -1,4 +1,4 @@
 return {
-  "mini.indentscope",
+  "lambdalisue/suda.vim",
   vscode = true,
 }
