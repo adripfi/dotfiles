@@ -2,55 +2,82 @@
 
 ## Prerequisites
 
-Need to be installed before cloning dotfiles 
-- zsh: 
+These tools need to be installed before cloning the dotfiles:
+
+### Core Shell Tools
+- zsh
 - brew: https://brew.sh/
-- Oh-my-zsh: https://ohmyz.sh/
-	- Plugins:
-	```bash
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-completions.git \
-	  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-	  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/powerlevel10k
-	git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
-	  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-	git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-	( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
-	```
 - stow: `brew install stow`
-- Neovim: `brew install neovim`
-- Yazi: https://github.com/sxyazi/yazi
+- xclip: `brew install xclip`
+- gio: `brew install gio`
+
+### Shell Enhancement
+- Powerlevel10k (don't set it up!): https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
+- Oh-my-zsh: https://ohmyz.sh/
+  - Required plugins:
+  ```bash
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-completions.git \
+    ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+    ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/powerlevel10k
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+  git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+  ( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
+  ```
+
+### Terminal & Fonts
 - JetBrainsMono Nerd Font: https://www.nerdfonts.com/font-downloads
 - Kitty: https://sw.kovidgoyal.net/kitty/binary/
-- yazi https://yazi-rs.github.io/docs/installation#homebrew
-- powerlevel10k: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh (don't set it up!)
+
+### Development Tools
+- Neovim: `brew install neovim`
+- Yazi: https://yazi-rs.github.io/docs/installation#homebrew
 - eza (replaces exa): `brew install eza`
 - lazygit: `brew install lazygit`
-- batcat `brew install bat`
-- zoxide: https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation 
+- bat: `brew install bat`
+- zoxide: https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
+- fzf: `brew install fzf`
+
 ## Installation
 
-Clone this repo into your home folder:
+1. Clone this repo into your home folder:
 ```bash
 cd ~ && git clone git@github.com:adripfi/dotfiles.git
 ```
-Rename:
+
+2. Rename the directory:
 ```bash
 mv ~/dotfiles ~/.dotfiles
 ```
-Link stow 
+
+3. Link configurations using stow:
 ```bash
-stow .
+stow config p10k zshrc
 ```
 
+## Shell Features
 
-## More CLI tools that don't need config and should be installed after this setup
-- fzf
-- karabiner see .json configs in `karabiner/`
+The shell configuration includes:
+- Powerlevel10k theme with instant prompt
+- Vi mode with custom keybindings
+- Syntax highlighting and autosuggestions
+- Custom aliases for improved workflow
+- Integration between zsh-vi-mode and fzf
+- Yazi integration with automatic directory change
+- Custom keybindings (CTRL+f for autosuggest-accept)
+
+## Additional Tools
+
+### CLI Tools
+- fzf (fuzzy finder)
+- karabiner (see .json configs in `karabiner/`)
 - Mamba: https://github.com/conda-forge/miniforge
-## More Important Apps
 
+
+### GUI Applications
 - Rectangle (Window management): https://github.com/rxhanson/Rectangle
-- Karabiner: 
+- Karabiner (Keyboard customization)
+
 
