@@ -116,7 +116,6 @@ alias ls="eza"
 alias ll="eza -l"
 alias la="eza -la"
 alias cat="bat"
-alias pbcopy="xclip -sel clip"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
 alias cm="chezmoi"
 alias vimdiff='nvim -d'
@@ -132,12 +131,7 @@ bindkey '^f' autosuggest-accept
 
 
 # Fix fzf keybindings overwritten by zsh-vim
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-
-#  source ros
-# source /opt/ros/noetic/setup.zsh
-# source ~/catkin_ws/devel/setup.zsh
-
+zvm_after_init_commands+=('source <(fzf --zsh)')
 
 # yazi cd on quit
 function y() {
@@ -152,6 +146,7 @@ function y() {
 
 export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
 eval "$(zoxide init zsh)"
+eval $(thefuck --alias)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
