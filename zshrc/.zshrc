@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-256color zsh-vi-mode)
+plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-256color zsh-vi-mode fzf-tab)
 
 # setup zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -150,6 +150,13 @@ eval "$(zoxide init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# fzf needed for yazi
 source ~/.fzf.zsh
+
+# source ros 
+source /opt/ros/humble/setup.zsh
+# ros autocomplete
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"
 
 
