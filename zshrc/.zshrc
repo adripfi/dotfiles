@@ -7,6 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -116,9 +117,8 @@ alias ls="eza"
 alias ll="eza -l"
 alias la="eza -la"
 alias cat="bat"
+alias catr="bat -pP"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
-alias cm="chezmoi"
-alias vimdiff='nvim -d'
 alias kssh='kitten ssh'
 alias tt="gio trash"
 alias c="clear"
@@ -130,8 +130,9 @@ alias lg="lazygit"
 bindkey '^f' autosuggest-accept
 
 
-# Fix fzf keybindings overwritten by zsh-vim
-zvm_after_init_commands+=('source <(fzf --zsh)')
+# atuin init
+zvm_after_init_commands+=('eval "$(atuin init zsh)"')
+. "$HOME/.atuin/bin/env"
 
 # yazi cd on quit
 function y() {
@@ -143,30 +144,12 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-
-export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
+# zoxide init
 eval "$(zoxide init zsh)"
-eval $(thefuck --alias)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/adrian/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/adrian/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/adrian/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/adrian/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+source ~/.fzf.zsh
 
-if [ -f "/Users/adrian/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/adrian/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
 
