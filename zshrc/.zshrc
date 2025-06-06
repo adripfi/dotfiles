@@ -118,6 +118,8 @@ alias ll="eza -l"
 alias la="eza -la"
 alias cat="bat"
 alias catr="bat -pP"
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
 alias kssh='kitten ssh'
 alias tt="gio trash"
@@ -152,6 +154,10 @@ eval "$(zoxide init zsh)"
 
 # fzf needed for yazi
 source ~/.fzf.zsh
+
+# set default editor to neovim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # source ros 
 source /opt/ros/humble/setup.zsh
