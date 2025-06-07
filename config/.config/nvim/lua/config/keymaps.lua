@@ -140,9 +140,10 @@ if vim.g.vscode then
   end
 else
   --- kitty nav
-  vim.keymap.set({ "n", "x" }, "<C-h>", ":KittyNavigateLeft<cr>", { silent = true })
-  vim.keymap.set({ "n", "x" }, "<C-l>", ":KittyNavigateRight<cr>", { silent = true })
-  vim.keymap.set({ "n", "x" }, "<C-j>", ":KittyNavigateDown<cr>", { silent = true })
-  vim.keymap.set({ "n", "x" }, "<C-k>", ":KittyNavigateUp<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<C-h>", ":TmuxNavigateLeft<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<C-l>", ":TmuxNavigateRight<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<C-j>", ":TmuxNavigateDown<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<C-k>", ":TmuxNavigateUp<cr>", { silent = true })
+  vim.keymap.set({ "n", "x" }, "<C-\\>", ":TmuxNavigatePrevious<cr>", { silent = true })
   vim.keymap.set({ "n", "x" }, "<leader>gp", ":Gitsigns preview_hunk<cr>", { silent = true })
 end
