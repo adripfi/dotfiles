@@ -50,8 +50,8 @@ return {
       },
       color_overrides = {
         mocha = {
-          base = "#00000",
-          mantle = "#00000",
+          mantle = "#000000",
+          base = "#000000",
         },
       },
       custom_highlights = function(colors)
