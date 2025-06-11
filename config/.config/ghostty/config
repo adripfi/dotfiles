@@ -1,3 +1,4 @@
 theme = iTerm2 Pastel Dark Background
-cursor-color = #a5d5fe
+cursor-color = #00c2ff
+clipboard-read = allow
 
