@@ -1,0 +1,32 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/pastel_dark.toml"
+]
+
+[colors.cursor]
+cursor = "#00c2ff"
+
+[font]
+size = 10.0
+
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Medium Italic"
+
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[debug]
+log_level = "Debug"
+
