@@ -126,12 +126,15 @@ alias cd="z"
 alias ci="zi"
 alias lg="lazygit"
 
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
 # accept the command suggested by zsh-autosuggestions by pressing CTRL + f
 bindkey '^f' autosuggest-accept
 
 
 # Fix fzf keybindings overwritten by zsh-vim
-zvm_after_init_commands+=('source <(fzf --zsh)')
+zvm_after_init_commands+=('source <(fzf --zsh) && eval "$(atuin init zsh)"')
 
 # yazi cd on quit
 function y() {
@@ -143,7 +146,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-
 export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
 eval "$(zoxide init zsh)"
 eval $(thefuck --alias)
@@ -151,22 +153,6 @@ eval $(thefuck --alias)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/adrian/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/adrian/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/adrian/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/adrian/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
 
-if [ -f "/Users/adrian/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/adrian/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
+. "$HOME/.atuin/bin/env"
 
