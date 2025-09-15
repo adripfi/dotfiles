@@ -12,7 +12,7 @@ size = 10.0
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -27,6 +27,6 @@ style = "Medium Italic"
 family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"
 
-[debug]
-log_level = "Debug"
+# [debug]
+# log_level = "Debug"
 
