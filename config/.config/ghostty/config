@@ -1,4 +1,5 @@
 theme = iTerm2 Pastel Dark Background
 cursor-color = #00c2ff
 clipboard-read = allow
+macos-option-as-alt = true
 
