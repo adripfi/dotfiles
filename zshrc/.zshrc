@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -86,6 +79,14 @@ autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -113,9 +114,9 @@ source $ZSH/oh-my-zsh.sh
 # Custom aliases
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
-alias ls="eza"
-alias ll="eza -l"
-alias la="eza -la"
+alias ls="lsd"
+alias ll="lsd -l"
+alias la="lsd -la"
 alias cat="bat"
 alias catr="bat -pP"
 alias pbcopy='xclip -selection clipboard'
@@ -127,13 +128,14 @@ alias c="clear"
 alias cd="z"
 alias ci="zi"
 alias lg="lazygit"
+alias uvsrc="source .venv/bin/activate"
 
 # accept the command suggested by zsh-autosuggestions by pressing CTRL + f
 bindkey '^f' autosuggest-accept
 
 
 # atuin init
-zvm_after_init_commands+=('eval "$(atuin init zsh)"')
+zvm_after_init_commands+=('eval "$(atuin init zsh --disable-up-arrow)"')
 . "$HOME/.atuin/bin/env"
 
 # yazi cd on quit
@@ -146,8 +148,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# zoxide init
-eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -165,4 +165,12 @@ source /opt/ros/humble/setup.zsh
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
+export ROS_DOMAIN_ID=7
+source /home/apfisterer/Documents/03_Infrastructure/panda_base_ws/install/setup.zsh
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# zoxide init
+eval "$(zoxide init zsh)"
