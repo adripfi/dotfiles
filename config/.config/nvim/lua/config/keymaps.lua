@@ -115,6 +115,11 @@ if vim.g.vscode then
     vscode.action("editor.action.goToReferences")
   end)
 
+  -- maximize current editor
+  vim.keymap.set({ "n" }, "<C-m>", function()
+    vscode.action("workbench.action.toggleMaximizeEditorGroup")
+  end)
+
   --  split editor
   vim.keymap.set({ "n", "v" }, "<C-S-o>", function()
     vscode.action("workbench.action.splitEditorRight")
