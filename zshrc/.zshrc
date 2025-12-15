@@ -2,6 +2,9 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# fix slow pasting i.e., disbale bracketed-paste-magic
+DISABLE_MAGIC_FUNCTIONS=true
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -10,6 +13,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Profiling
+# zmodload zsh/zprof
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,11 +77,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-256color zsh-vi-mode fzf-tab)
+plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode fzf-tab)
 
 # setup zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
+# fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# autoload -U compinit && compinit
+# Speed up over above stragegy:
+# Set up completion, using -D to ensure old cache is cleared if files are updated
+# The -C flag enables caching.
+autoload -Uz compinit
+compinit -C
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,7 +119,6 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
 
 
 # Custom aliases
@@ -159,14 +169,17 @@ source ~/.fzf.zsh
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-# source ros 
-source /opt/ros/humble/setup.zsh
-# ros autocomplete
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
+# only load ros when needed to speed up start up 
+function ros-setup() {
+  echo "Setting up ROS Humble environment..."
+  source /opt/ros/humble/setup.zsh
+  eval "$(register-python-argcomplete3 ros2)"
+  eval "$(register-python-argcomplete3 colcon)"
+  source /home/apfisterer/Documents/03_Infrastructure/panda_base_ws/install/setup.zsh
+  unfunction ros-setup # Remove the function after first use
+}
 
 export ROS_DOMAIN_ID=7
-source /home/apfisterer/Documents/03_Infrastructure/panda_base_ws/install/setup.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
