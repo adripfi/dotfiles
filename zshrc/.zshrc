@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# fix slow pasting i.e., disbale bracketed-paste-magic
+DISABLE_MAGIC_FUNCTIONS=true
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -77,11 +80,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-256color zsh-vi-mode)
+plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
 
 # setup zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
+# Speed up over above stragegy:
+# Set up completion, using -D to ensure old cache is cleared if files are updated
+# The -C flag enables caching.
+autoload -Uz compinit
+compinit -C
 
 source $ZSH/oh-my-zsh.sh
 
@@ -156,3 +164,5 @@ eval $(thefuck --alias)
 
 . "$HOME/.atuin/bin/env"
 
+# Added by Antigravity
+export PATH="/Users/adrian/.antigravity/antigravity/bin:$PATH"
