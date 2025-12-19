@@ -2,13 +2,6 @@ return {
   { "navarasu/onedark.nvim", opts = { style = "darker" } },
   {
     "catppuccin/nvim",
-    require("catppuccin").setup({
-      custom_highlights = function(colors)
-        return {
-          FlashLabel = { fg = "#1b1d2b", bg = colors.blue },
-        }
-      end,
-    }),
     lazy = true,
     name = "catppuccin",
     opts = {
@@ -61,7 +54,6 @@ return {
       end,
     },
   },
-
   {
     "LazyVim/LazyVim",
     opts = {
