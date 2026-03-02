@@ -1,0 +1,41 @@
+
+[[mgr.prepend_keymap]]
+on   = "<C-n>"
+run  = "shell -- xdg-open ."
+desc = "Open system file browser for current directory"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+run  = "plugin vcs-files"
+desc = "Show Git file changes"
+
+# --- Override default create behavior ---
+
+# Disable default "a" (create file OR dir depending on trailing slash)
+[[mgr.prepend_keymap]]
+on  = "a"
+run = "noop"
+
+# Lowercase a → create file only
+[[mgr.prepend_keymap]]
+on   = "a"
+run  = "create --force"
+desc = "Create file"
+
+
+# Uppercase A → create directory only
+[[mgr.prepend_keymap]]
+on   = "A"
+run  = "create --dir --force"
+desc = "Create directory"
+
+# --- git file changes view
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
