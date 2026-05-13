@@ -2,9 +2,11 @@ return {
   { "navarasu/onedark.nvim", opts = { style = "darker" } },
   {
     "catppuccin/nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     name = "catppuccin",
     opts = {
+      flavour = "mocha",
       term_colors = true,
       integrations = {
         aerial = true,
@@ -43,8 +45,9 @@ return {
       },
       color_overrides = {
         mocha = {
-          mantle = "#000000",
           base = "#000000",
+          mantle = "#000000",
+          crust = "#000000",
         },
       },
       custom_highlights = function(colors)
@@ -57,7 +60,10 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = function()
+        require("lazy.core.loader").load("catppuccin", { colorscheme = "catppuccin" })
+        require("catppuccin").load("mocha")
+      end,
     },
   },
 }
