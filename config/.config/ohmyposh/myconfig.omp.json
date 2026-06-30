@@ -21,25 +21,25 @@
           "type": "path"
         },
         {
-          "foreground": "#ff94df",
+          "foreground": "lightMagenta",
           "options": {
-            "branch_icon": " <#ff94df><b>\ue0a0 </b></>",
+            "branch_icon": " <lightMagenta><b>\ue0a0 </b></>",
             "fetch_status": true,
             "fetch_push_status": true,
             "status_formats": {
-              "Added": "\uf055 %d  ",
-              "Deleted": "\uf1f8 %d  ",
-              "Modified": "\uf044 %d  ",
-              "Untracked": "\uf059 %d  ",
-              "Unmerged": "\uf071 %d  "
+              "Added": "\uf055 %d ",
+              "Deleted": "\uf1f8 %d ",
+              "Modified": "\uf044 %d ",
+              "Untracked": "\uf059 %d ",
+              "Unmerged": "\uf071 %d "
             }
           },
           "style": "plain",
-          "template": "<#ffffff>on</> {{ .HEAD }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }} \uf062 {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} \uf063 {{ .Behind }}{{ end }} ",
+          "template": "<#ffffff>on</>{{.HEAD  }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .Ahead 0 }} \uf062 {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} \uf063 {{ .Behind }}{{ end }} ",
           "type": "git"
         },
         {
-          "foreground": "#ffd43b",
+          "foreground": "yellow",
           "style": "plain",
           "template": "<#ffffff>using</> \ue235 {{ .Venv }} ",
           "type": "python",
