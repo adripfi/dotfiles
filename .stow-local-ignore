@@ -3,4 +3,14 @@ README.md
 LICENSE
 scripts/
 notes.md
-
+flake.nix
+home.nix
+\.gitignore
+\.DS_Store
+.*\.bak
+.*\.log
+^\.config/yazi/plugins
+^\.config/yazi/flavors
+^\.config/ruff/\.ruff_cache
+^\.config/atuin/atuin-receipt\.json
+^\.config/alacritty/themes/images
