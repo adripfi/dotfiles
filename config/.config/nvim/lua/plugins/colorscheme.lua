@@ -1,5 +1,4 @@
 return {
-  { "navarasu/onedark.nvim", opts = { style = "darker" } },
   {
     "catppuccin/nvim",
     require("catppuccin").setup({
