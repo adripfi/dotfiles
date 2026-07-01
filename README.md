@@ -1,123 +1,77 @@
-# macOS Setup
+# Dotfiles
 
-## Prerequisites
+This repo uses Nix Home Manager for packages and GNU Stow for config symlinks.
+Home Manager installs the tools; Stow links the dotfiles into `$HOME`.
 
-These tools need to be installed before cloning the dotfiles:
+## Manual Prerequisites
 
-### Core Shell Tools
-- zsh
-- brew: https://brew.sh/
-- Install all tools at once:
-  ```bash
-  brew install stow xclip gio neovim eza lazygit bat zoxide fzf fd duf thefuck
-  ```
-- Individual installations:
-  - stow: 
-    ```bash
-    brew install stow
-    ```
-  - xclip: 
-    ```bash
-    brew install xclip
-    ```
-  - gio: 
-    ```bash
-    brew install gio
-    ```
+- Install Nix with flakes enabled.
+- Install `JetBrainsMono Nerd Font` and select it in the terminal.
+- Set the login shell to `zsh` if the machine does not already use it.
+- Optional: install machine-specific tools that are not part of this baseline,
+  such as ROS, Pixi, Opencode, or project SDKs.
+- Optional: install Hunk for the LazyGit pager:
 
-### Shell Enhancement
-- Oh-my-zsh: https://ohmyz.sh/
-  - Required plugins (all installed via single commands):
-  ```bash
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/powerlevel10k
-  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-  git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-  git clone https://github.com/chrissicool/zsh-256color ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-256color
-  ```
-
-### Terminal & Fonts
-- JetBrainsMono Nerd Font: https://www.nerdfonts.com/font-downloads
-- Kitty: https://sw.kovidgoyal.net/kitty/binary/
-
-### Development Tools
-- Neovim: 
-  ```bash
-  brew install neovim
-  ```
-- Yazi: https://yazi-rs.github.io/docs/installation#homebrew
-- eza (replaces exa): 
-  ```bash
-  brew install eza
-  ```
-- lazygit: 
-  ```bash
-  brew install lazygit
-  ```
-- bat: 
-  ```bash
-  brew install bat
-  ```
-- zoxide: 
-  ```bash
-  brew install zoxide
-  ```
-- fzf: 
-  ```bash
-  brew install fzf
-  ```
-- fd-find:
-  ```bash
-  brew install fd
-  ```
-- duf:
-  ```bash
-  brew install duf
-  ```
-- thefuck:
-  ```bash
-  brew install thefuck
-  ```
-
-## Installation
-
-1. Clone this repo into your home folder:
 ```bash
-cd ~ && git clone git@github.com:adripfi/dotfiles.git
+npm install -g hunkdiff
 ```
 
-2. Rename the directory:
+## Setup
+
 ```bash
-mv ~/dotfiles ~/.dotfiles
+git clone git@github.com:adripfi/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+nix run github:nix-community/home-manager -- switch --flake .#apfisterer
 ```
 
-3. Link configurations using stow:
+The Home Manager activation links the stow packages automatically:
+
 ```bash
-stow config p10k zshrc
+stow --no-folding --dir="$HOME/.dotfiles" --target="$HOME" config tmux zshrc
 ```
 
-## Shell Features
+Install Yazi packages from `package.toml`:
 
-The shell configuration includes:
-- Powerlevel10k theme with instant prompt
-- Vi mode with custom keybindings
-- Syntax highlighting and autosuggestions
-- Custom aliases for improved workflow
-- Integration between zsh-vi-mode and fzf
-- Yazi integration with automatic directory change
-- Custom keybindings (CTRL+f for autosuggest-accept)
+```bash
+ya pkg install
+```
 
-## Additional Tools
+Restore Neovim plugins from the LazyVim lock file:
 
-### CLI Tools
-- fzf (fuzzy finder)
-- karabiner (see .json configs in `karabiner/`)
-- Mamba: https://github.com/conda-forge/miniforge
+```bash
+nvim --headless '+Lazy! restore' +qa
+```
 
-### GUI Applications
-- Rectangle (Window management): https://github.com/rxhanson/Rectangle
-- Karabiner (Keyboard customization)
-- Scroll Reverser: https://pilotmoon.com/scrollreverser/
+## Updating
 
+```bash
+cd ~/.dotfiles
+nix flake update
+home-manager switch --flake .#apfisterer
+```
 
+Yazi packages:
+
+```bash
+ya pkg upgrade
+```
+
+Neovim plugins:
+
+```vim
+:Lazy update
+```
+
+Commit these files when updates are intentional:
+
+- `flake.lock`
+- `config/.config/nvim/lazy-lock.json`
+- `config/.config/nvim/lazyvim.json`
+- `config/.config/yazi/package.toml`
+
+## Repo Policy
+
+Track hand-written config, LazyVim lock files, and `yazi/package.toml`.
+
+Do not track installed Yazi plugin directories, Ruff caches, `.DS_Store`, backup
+files, logs, or Alacritty theme preview images.
