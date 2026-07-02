@@ -1,8 +1,7 @@
 git:
-  paging:
-    colorArg: always
-    pager: hunk pager --transparent-bg
-
+  pagers:
+    - colorArg: always
+      pager: hunk pager --transparent-bg
 gui:
   theme:
     activeBorderColor:
@@ -24,6 +23,5 @@ gui:
       - '#cdd6f4'
     searchingActiveBorderColor:
       - '#f9e2af'
-
   authorColors:
     '*': '#b4befe'

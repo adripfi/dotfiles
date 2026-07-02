@@ -1,10 +1,14 @@
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.opencode/bin:$HOME/.pixi/bin:$PATH"
+export PATH="$HOME/.nix-profile/bin:$HOME/.local/state/nix/profiles/profile/bin:$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.opencode/bin:$HOME/.pixi/bin:$PATH"
 
 DISABLE_MAGIC_FUNCTIONS=true
 
 autoload -Uz compinit
 compinit -C
+
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 source_first() {
   emulate -L zsh
@@ -32,10 +36,6 @@ source_first \
   "$HOME/.oh-my-zsh/custom/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 source_first \
-  "$HOME/.nix-profile/share/fzf-tab/fzf-tab.plugin.zsh" \
-  "$HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh"
-
-source_first \
   "$HOME/.nix-profile/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh" \
   "$HOME/.nix-profile/share/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" \
   "$HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
@@ -61,13 +61,12 @@ alias cd="z"
 alias ci="zi"
 alias lg="lazygit"
 alias uvsrc="source .venv/bin/activate"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 if (( $+widgets[autosuggest-accept] )); then
   bindkey '^f' autosuggest-accept
-fi
-
-if command -v atuin >/dev/null 2>&1; then
-  eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 function y() {
@@ -83,6 +82,18 @@ if [ -r "$HOME/.fzf.zsh" ]; then
   source "$HOME/.fzf.zsh"
 elif command -v fzf >/dev/null 2>&1; then
   eval "$(fzf --zsh 2>/dev/null)"
+fi
+
+init_atuin() {
+  if command -v atuin >/dev/null 2>&1; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+  fi
+}
+
+if (( $+zvm_after_init_commands )); then
+  zvm_after_init_commands+=("init_atuin")
+else
+  init_atuin
 fi
 
 export VISUAL=nvim
