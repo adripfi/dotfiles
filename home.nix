@@ -14,7 +14,6 @@
     duf
     fd
     fzf
-    fzf-tab
     gcc
     git
     glib
