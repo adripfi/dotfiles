@@ -1,70 +1,38 @@
+local catppuccin_opts = {
+  flavour = "mocha",
+  term_colors = true,
+  color_overrides = {
+    mocha = {
+      base = "#000000",
+      mantle = "#000000",
+      crust = "#000000",
+    },
+  },
+  custom_highlights = function(colors)
+    return {
+      Normal = { bg = "#000000" },
+      NormalFloat = { bg = "#000000" },
+      NormalNC = { bg = "#000000" },
+      WinSeparator = { fg = colors.surface0 },
+    }
+  end,
+}
+
 return {
   {
     "catppuccin/nvim",
-    require("catppuccin").setup({
-      custom_highlights = function(colors)
-        return {
-          FlashLabel = { fg = "#1b1d2b", bg = colors.blue },
-        }
-      end,
-    }),
-    lazy = true,
     name = "catppuccin",
-    opts = {
-      term_colors = true,
-      integrations = {
-        aerial = true,
-        alpha = true,
-        cmp = true,
-        dashboard = true,
-        flash = true,
-        gitsigns = true,
-        headlines = true,
-        illuminate = true,
-        indent_blankline = { enabled = true },
-        leap = true,
-        lsp_trouble = true,
-        mason = true,
-        markdown = true,
-        mini = true,
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-          },
-        },
-        navic = { enabled = true, custom_bg = "lualine" },
-        neotest = true,
-        neotree = true,
-        noice = true,
-        notify = true,
-        semantic_tokens = true,
-        telescope = true,
-        treesitter = true,
-        treesitter_context = true,
-        which_key = true,
-      },
-      color_overrides = {
-        mocha = {
-          base = "#000000",
-          mantle = "#000000",
-        },
-      },
-      custom_highlights = function(colors)
-        return {
-          WinSeparator = { fg = colors.surface0 },
-        }
-      end,
-    },
+    lazy = false,
+    priority = 1000,
   },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = function()
+        require("catppuccin").setup(catppuccin_opts)
+        vim.cmd.colorscheme("catppuccin")
+      end,
     },
   },
 }
