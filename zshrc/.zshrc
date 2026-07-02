@@ -65,9 +65,28 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-if (( $+widgets[autosuggest-accept] )); then
-  bindkey '^f' autosuggest-accept
-fi
+setup_keybindings() {
+  if (( $+widgets[autosuggest-accept] )); then
+    bindkey '^f' autosuggest-accept
+    bindkey -M viins '^f' autosuggest-accept 2>/dev/null
+  fi
+
+  bindkey '^[[1;5C' forward-word
+  bindkey '^[[5C' forward-word
+  bindkey '^[OC' forward-word
+  bindkey '^[[1;5D' backward-word
+  bindkey '^[[5D' backward-word
+  bindkey '^[OD' backward-word
+
+  bindkey -M viins '^[[1;5C' forward-word 2>/dev/null
+  bindkey -M viins '^[[5C' forward-word 2>/dev/null
+  bindkey -M viins '^[OC' forward-word 2>/dev/null
+  bindkey -M viins '^[[1;5D' backward-word 2>/dev/null
+  bindkey -M viins '^[[5D' backward-word 2>/dev/null
+  bindkey -M viins '^[OD' backward-word 2>/dev/null
+}
+
+setup_keybindings
 
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -91,6 +110,7 @@ init_atuin() {
 }
 
 if (( $+zvm_after_init_commands )); then
+  zvm_after_init_commands+=("setup_keybindings")
   zvm_after_init_commands+=("init_atuin")
 else
   init_atuin
