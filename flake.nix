@@ -7,13 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hunk = {
-      url = "github:modem-dev/hunk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, hunk, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       mkHome = { system, username, homeDirectory }:
         let
@@ -25,7 +21,7 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            inherit username homeDirectory hunk;
+            inherit username homeDirectory;
           };
           modules = [ ./home.nix ];
         };
@@ -35,6 +31,12 @@
           system = "x86_64-linux";
           username = "apfisterer";
           homeDirectory = "/home/apfisterer";
+        };
+
+        adrian = mkHome {
+          system = "x86_64-linux";
+          username = "adrian";
+          homeDirectory = "/home/adrian";
         };
 
         adrian-mac = mkHome {

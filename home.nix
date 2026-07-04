@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, homeDirectory, hunk, ... }:
+{ config, lib, pkgs, username, homeDirectory, ... }:
 
 {
   home.username = username;
@@ -15,7 +15,6 @@
     fzf
     git
     gnumake
-    hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
     lazygit
     lsd
     neovim
@@ -41,6 +40,21 @@
   ];
 
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    settings = {
+      core.pager = "delta";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      line-numbers = true;
+    };
+  };
 
   home.activation.stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ -d "$HOME/.dotfiles" ]; then
