@@ -1,13 +1,24 @@
 # Dotfiles
 
-This repo uses Nix Home Manager for packages and GNU Stow for config symlinks.
-Home Manager installs the tools; Stow links the dotfiles into `$HOME`.
+This repo uses Nix Home Manager for portable CLI packages and GNU Stow for
+config symlinks. Home Manager installs the tools; Stow links the dotfiles into
+`$HOME`.
+
+On macOS, keep Homebrew for GUI apps, casks, fonts, and macOS-specific tools.
+Use Home Manager for the shared shell/dev CLI baseline.
 
 ## Manual Prerequisites
 
-- Install Nix with flakes enabled.
+- Install Nix from https://nixos.org/download/.
+- Enable flakes:
+
+```bash
+mkdir -p ~/.config/nix && printf 'experimental-features = nix-command flakes\n' > ~/.config/nix/nix.conf
+```
+
 - Install `JetBrainsMono Nerd Font` and select it in the terminal.
 - Set the login shell to `zsh` if the machine does not already use it.
+- On macOS, install Homebrew for casks, fonts, and native apps.
 - Optional: install machine-specific tools that are not part of this baseline,
   such as ROS, Pixi, Opencode, or project SDKs.
 - Optional: install Hunk for the LazyGit pager:
@@ -22,6 +33,13 @@ npm install -g hunkdiff
 git clone git@github.com:adripfi/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 nix run github:nix-community/home-manager -- switch --flake .#apfisterer
+```
+
+On this Mac:
+
+```bash
+cd ~/.dotfiles
+nix run github:nix-community/home-manager -- switch --flake .#adrian-mac
 ```
 
 The Home Manager activation links the stow packages automatically:
@@ -48,6 +66,12 @@ nvim --headless '+Lazy! restore' +qa
 cd ~/.dotfiles
 nix flake update
 home-manager switch --flake .#apfisterer
+```
+
+On this Mac:
+
+```bash
+home-manager switch --flake .#adrian-mac
 ```
 
 Yazi packages:

@@ -1,12 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, homeDirectory, ... }:
 
 {
-  home.username = "apfisterer";
-  home.homeDirectory = "/home/apfisterer";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
-    alacritty
     atuin
     bat
     bun
@@ -14,9 +13,7 @@
     duf
     fd
     fzf
-    gcc
     git
-    glib
     gnumake
     lazygit
     lsd
@@ -28,14 +25,18 @@
     tmux
     unzip
     wget
-    xclip
-    xdg-utils
     yazi
     zoxide
     zsh
     zsh-autosuggestions
     zsh-fast-syntax-highlighting
     zsh-vi-mode
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    alacritty
+    gcc
+    glib
+    xclip
+    xdg-utils
   ];
 
   programs.home-manager.enable = true;

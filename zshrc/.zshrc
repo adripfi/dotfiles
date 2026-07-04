@@ -1,4 +1,4 @@
-export PATH="$HOME/.nix-profile/bin:$HOME/.local/state/nix/profiles/profile/bin:$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.opencode/bin:$HOME/.pixi/bin:$PATH"
+export PATH="$HOME/.nix-profile/bin:$HOME/.local/state/nix/profiles/profile/bin:/etc/profiles/per-user/$USER/bin:/nix/var/nix/profiles/default/bin:$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.opencode/bin:$HOME/.pixi/bin:$PATH"
 
 DISABLE_MAGIC_FUNCTIONS=true
 
@@ -52,10 +52,14 @@ alias la="lsd -la"
 alias g="git"
 alias cat="bat"
 alias catr="bat -pP"
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
+if ! command -v pbcopy >/dev/null 2>&1 && command -v xclip >/dev/null 2>&1; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+fi
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
-alias tt="gio trash"
+if command -v gio >/dev/null 2>&1; then
+  alias tt="gio trash"
+fi
 alias c="clear"
 alias cd="z"
 alias ci="zi"
