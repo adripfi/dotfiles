@@ -1,0 +1,10 @@
+\.DS_Store
+.+\.bak
+.+\.log
+
+^/\.config/nvim/\.nvimlog
+^/\.config/ruff/\.ruff_cache(/.*)?
+^/\.config/atuin/atuin-receipt\.json
+^/\.config/yazi/plugins(/.*)?
+^/\.config/yazi/flavors(/.*)?
+^/\.config/alacritty/themes/images(/.*)?

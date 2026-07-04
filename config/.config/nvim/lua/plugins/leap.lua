@@ -1,4 +1,5 @@
 return {
-  "https://codeberg.org/andyg/leap.nvim.git",
+  url = "https://codeberg.org/andyg/leap.nvim",
+  enabled = true,
   vscode = true,
 }

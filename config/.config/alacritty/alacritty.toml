@@ -3,23 +3,15 @@ import = [
     "~/.config/alacritty/themes/themes/pastel_dark.toml"
 ]
 
-[window]
-padding = {x=3, y=2}
-option_as_alt = "Both"
-
-[terminal]
-osc52 = "CopyPaste"
-
 [colors.cursor]
 cursor = "#00c2ff"
 
 [font]
-size = 12.0
-
+size = 9.0
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -34,6 +26,48 @@ style = "Medium Italic"
 family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"
 
-[debug]
-log_level = "Debug"
+# [debug]
+# log_level = "Debug"
 
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
+
+# Disable Alacritty's default Ctrl zoom bindings.
+[[keyboard.bindings]]
+key = "="
+mods = "Control"
+action = "None"
+
+[[keyboard.bindings]]
+key = "+"
+mods = "Control"
+action = "None"
+
+[[keyboard.bindings]]
+key = "-"
+mods = "Control"
+action = "None"
+
+# Remap zoom to Ctrl+Shift plus/minus.
+[[keyboard.bindings]]
+key = "="
+mods = "Control|Shift"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "+"
+mods = "Control|Shift"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "-"
+mods = "Control|Shift"
+action = "DecreaseFontSize"
+
+[[keyboard.bindings]]
+key = "_"
+mods = "Control|Shift"
+action = "DecreaseFontSize"

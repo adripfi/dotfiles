@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+tmux_mem_cpu_load="${HOME}/.tmux/plugins/tmux-mem-cpu-load/tmux-mem-cpu-load"
+
+if [ ! -x "$tmux_mem_cpu_load" ]; then
+  exit 0
+fi
+
+set -- "$("$tmux_mem_cpu_load" --interval 2 --graph-lines 0 --averages-count 0 --mem-mode 2 | tr -d '\000')"
+
+mem=${1%% *}
+cpu=${1##* }
+
+mem=$(awk -v value="$mem" 'BEGIN { printf "%.0f%%", value }')
+cpu=$(awk -v value="$cpu" 'BEGIN { printf "%.0f%%", value }')
+
+printf ' %s  %s' "$mem" "$cpu"

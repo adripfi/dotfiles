@@ -45,6 +45,11 @@ vim.keymap.set("n", "}", function()
   })
 end, { desc = "Jump to next method" })
 
+-- pasting in visual mode does not put replaced work in clipboard/defaul register
+vim.keymap.set("x", "p", '"_dP', {
+  desc = "Paste without yanking replaced text",
+})
+
 --vscode specfig keymas
 if vim.g.vscode then
   vim.g.mapleader = " "
@@ -115,6 +120,11 @@ if vim.g.vscode then
     vscode.action("editor.action.goToReferences")
   end)
 
+  -- maximize current editor
+  vim.keymap.set({ "n" }, "<C-m>", function()
+    vscode.action("workbench.action.toggleMaximizeEditorGroup")
+  end)
+
   --  split editor
   vim.keymap.set({ "n", "v" }, "<C-S-o>", function()
     vscode.action("workbench.action.splitEditorRight")
@@ -125,6 +135,10 @@ if vim.g.vscode then
   vim.keymap.set({ "n", "v" }, "go", function()
     vscode.action("workbench.action.showAllEditors")
   end)
+
+  -- fix scrolling in visual mode
+  -- vim.keymap.set("v", "<C-d>", "<C-d>gv", { noremap = true, silent = true })
+  -- vim.keymap.set("v", "<C-u>", "<C-u>gv", { noremap = true, silent = true })
 
   -- set flash highlight groups
   local hls = {

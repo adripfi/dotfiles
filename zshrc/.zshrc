@@ -1,169 +1,147 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+export PATH="$HOME/.nix-profile/bin:$HOME/.local/state/nix/profiles/profile/bin:/etc/profiles/per-user/$USER/bin:/nix/var/nix/profiles/default/bin:$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.opencode/bin:$HOME/.pixi/bin:$PATH"
 
-# fix slow pasting i.e., disbale bracketed-paste-magic
 DISABLE_MAGIC_FUNCTIONS=true
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-eval "$(starship init zsh)"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
-
-# setup zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-# autoload -U compinit && compinit
-# Speed up over above stragegy:
-# Set up completion, using -D to ensure old cache is cleared if files are updated
-# The -C flag enables caching.
 autoload -Uz compinit
 compinit -C
 
-source $ZSH/oh-my-zsh.sh
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# User configuration
+source_first() {
+  emulate -L zsh
+  setopt null_glob
 
-# export MANPATH="/usr/local/man:$MANPATH"
+  local pattern file
+  for pattern in "$@"; do
+    for file in ${~pattern}; do
+      if [ -r "$file" ]; then
+        source "$file"
+        return 0
+      fi
+    done
+  done
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+  return 1
+}
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+source_first \
+  "$HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+  "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+source_first \
+  "$HOME/.nix-profile/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" \
+  "$HOME/.oh-my-zsh/custom/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
+source_first \
+  "$HOME/.nix-profile/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh" \
+  "$HOME/.nix-profile/share/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" \
+  "$HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
-# Custom aliases
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
-alias ls="eza"
+alias ls="lsd"
 alias ll="lsd -l"
 alias la="lsd -la"
+alias g="git"
 alias cat="bat"
+alias catr="bat -pP"
+if ! command -v pbcopy >/dev/null 2>&1 && command -v xclip >/dev/null 2>&1; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+fi
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
-alias cm="chezmoi"
-alias vimdiff='nvim -d'
-alias kssh='kitten ssh'
-alias tt="gio trash"
+if command -v gio >/dev/null 2>&1; then
+  alias tt="gio trash"
+fi
 alias c="clear"
 alias cd="z"
 alias ci="zi"
 alias lg="lazygit"
+alias uvsrc="source .venv/bin/activate"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+setup_keybindings() {
+  if (( $+widgets[autosuggest-accept] )); then
+    bindkey '^f' autosuggest-accept
+    bindkey -M viins '^f' autosuggest-accept 2>/dev/null
+  fi
+
+  bindkey '^[[1;5C' forward-word
+  bindkey '^[[5C' forward-word
+  bindkey '^[OC' forward-word
+  bindkey '^[[1;5D' backward-word
+  bindkey '^[[5D' backward-word
+  bindkey '^[OD' backward-word
+
+  bindkey -M viins '^[[1;5C' forward-word 2>/dev/null
+  bindkey -M viins '^[[5C' forward-word 2>/dev/null
+  bindkey -M viins '^[OC' forward-word 2>/dev/null
+  bindkey -M viins '^[[1;5D' backward-word 2>/dev/null
+  bindkey -M viins '^[[5D' backward-word 2>/dev/null
+  bindkey -M viins '^[OD' backward-word 2>/dev/null
+}
+
+setup_keybindings
+
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+if [ -r "$HOME/.fzf.zsh" ]; then
+  source "$HOME/.fzf.zsh"
+elif command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh 2>/dev/null)"
+fi
+
+init_atuin() {
+  if command -v atuin >/dev/null 2>&1; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+  fi
+}
+
+if (( $+zvm_after_init_commands )); then
+  zvm_after_init_commands+=("setup_keybindings")
+  zvm_after_init_commands+=("init_atuin")
+else
+  init_atuin
+fi
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-# accept the command suggested by zsh-autosuggestions by pressing CTRL + f
-bindkey '^f' autosuggest-accept
-
-
-# Fix fzf keybindings overwritten by zsh-vim
-zvm_after_init_commands+=('source <(fzf --zsh) && eval "$(atuin init zsh)"')
-
-# yazi cd on quit
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+function ros-setup() {
+  echo "Setting up ROS Humble environment..."
+  source /opt/ros/humble/setup.zsh
+  eval "$(register-python-argcomplete3 ros2)"
+  eval "$(register-python-argcomplete3 colcon)"
+  source "$HOME/Documents/03_Infrastructure/panda_base_ws/install/setup.zsh"
+  unfunction ros-setup
 }
 
-export PATH="/Users/adrian/.local/bin:/opt/homebrew/bin:$PATH"
-eval "$(zoxide init zsh)"
-eval $(thefuck --alias)
+export ROS_DOMAIN_ID=7
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
-. "$HOME/.atuin/bin/env"
-
-# Added by Antigravity
-export PATH="/Users/adrian/.antigravity/antigravity/bin:$PATH"
+preexec() {
+  echo -n "\x1b]133;A\x1b\\"
+}

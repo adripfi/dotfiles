@@ -1,11 +1,13 @@
-[[mgr.prepend_keymap]]
-on = "<C-p>"
-run = 'shell -- qlmanage -p "$@"'
 
 [[mgr.prepend_keymap]]
-on  = "<C-n>"
-run = 'shell -- open "$PWD"'
-desc = "Open current directory in Finder"
+on   = "<C-n>"
+run  = "shell -- xdg-open ."
+desc = "Open system file browser for current directory"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+run  = "plugin vcs-files"
+desc = "Show Git file changes"
 
 # --- Override default create behavior ---
 
@@ -26,3 +28,14 @@ desc = "Create file"
 on   = "A"
 run  = "create --dir --force"
 desc = "Create directory"
+
+# --- git file changes view
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
