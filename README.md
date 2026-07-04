@@ -21,11 +21,6 @@ mkdir -p ~/.config/nix && printf 'experimental-features = nix-command flakes\n' 
 - On macOS, install Homebrew for casks, fonts, and native apps.
 - Optional: install machine-specific tools that are not part of this baseline,
   such as ROS, Pixi, Opencode, or project SDKs.
-- Optional: install Hunk for the LazyGit pager:
-
-```bash
-npm install -g hunkdiff
-```
 
 ## Setup
 
@@ -35,7 +30,7 @@ cd ~/.dotfiles
 nix run github:nix-community/home-manager -- switch --flake .#apfisterer
 ```
 
-On this Mac:
+On Mac:
 
 ```bash
 cd ~/.dotfiles

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, homeDirectory, ... }:
+{ config, lib, pkgs, username, homeDirectory, hunk, ... }:
 
 {
   home.username = username;
@@ -15,6 +15,7 @@
     fzf
     git
     gnumake
+    hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
     lazygit
     lsd
     neovim
