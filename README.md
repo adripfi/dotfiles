@@ -63,7 +63,7 @@ nix flake update
 home-manager switch --flake .#apfisterer
 ```
 
-On this Mac:
+On Mac:
 
 ```bash
 home-manager switch --flake .#adrian-mac

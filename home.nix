@@ -13,6 +13,7 @@
     duf
     fd
     fzf
+    glow
     git
     gnumake
     lazygit
