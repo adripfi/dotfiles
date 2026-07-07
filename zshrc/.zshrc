@@ -52,12 +52,6 @@ alias la="lsd -la"
 alias g="git"
 alias cat="bat"
 alias catr="bat -pP"
-<<<<<<< HEAD
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
-alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
-alias tt="gio trash"
-=======
 if ! command -v pbcopy >/dev/null 2>&1 && command -v xclip >/dev/null 2>&1; then
   alias pbcopy="xclip -selection clipboard"
   alias pbpaste="xclip -selection clipboard -o"
@@ -66,7 +60,6 @@ alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
 if command -v gio >/dev/null 2>&1; then
   alias tt="gio trash"
 fi
->>>>>>> 8d021de9ecabc8cd018717e613b81382c1587ca4
 alias c="clear"
 alias cd="z"
 alias ci="zi"
