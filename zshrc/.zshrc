@@ -46,9 +46,10 @@ fi
 
 alias vi="nvim"
 alias zshconfig="vi ~/.zshrc"
-alias ls="lsd"
-alias ll="lsd -l"
-alias la="lsd -la"
+alias ls="lsd  --group-dirs first"
+alias l="lsd -l"
+alias ll="lsd -l --group-dirs first"
+alias la="lsd -la --group-dirs first"
 alias g="git"
 alias cat="bat"
 alias catr="bat -pP"
@@ -57,9 +58,6 @@ if ! command -v pbcopy >/dev/null 2>&1 && command -v xclip >/dev/null 2>&1; then
   alias pbpaste="xclip -selection clipboard -o"
 fi
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard:' && pwd"
-if command -v gio >/dev/null 2>&1; then
-  alias tt="gio trash"
-fi
 alias c="clear"
 alias cd="z"
 alias ci="zi"
@@ -68,7 +66,13 @@ alias uvsrc="source .venv/bin/activate"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
+# trash-cli replacement to make rm "safer"
+rm() {
+    trash-put "$@" && {
+        printf 'Moved to Trash:\n'
+        printf '  %s\n' "$@"
+    }
+}
 setup_keybindings() {
   if (( $+widgets[autosuggest-accept] )); then
     bindkey '^f' autosuggest-accept

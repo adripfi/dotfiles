@@ -24,6 +24,7 @@
     starship
     stow
     tmux
+    trash-cli
     unzip
     wget
     yazi
