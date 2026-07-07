@@ -73,11 +73,24 @@ rm() {
         printf '  %s\n' "$@"
     }
 }
+
+zoxide_interactive_widget() {
+  if command -v zoxide >/dev/null 2>&1; then
+    BUFFER='zi'
+    zle accept-line
+  fi
+}
+
+zle -N zoxide_interactive_widget
+
 setup_keybindings() {
   if (( $+widgets[autosuggest-accept] )); then
     bindkey '^f' autosuggest-accept
     bindkey -M viins '^f' autosuggest-accept 2>/dev/null
   fi
+
+  bindkey '^T' zoxide_interactive_widget
+  bindkey -M viins '^T' zoxide_interactive_widget 2>/dev/null
 
   bindkey '^[[1;5C' forward-word
   bindkey '^[[5C' forward-word
