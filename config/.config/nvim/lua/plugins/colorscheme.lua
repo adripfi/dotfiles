@@ -1,18 +1,13 @@
 local catppuccin_opts = {
   flavour = "mocha",
   term_colors = true,
-  color_overrides = {
-    mocha = {
-      base = "#000000",
-      mantle = "#000000",
-      crust = "#000000",
-    },
-  },
+  -- Let Ghostty provide its configured background, opacity, and blur.
+  transparent_background = true,
   custom_highlights = function(colors)
     return {
-      Normal = { bg = "#000000" },
-      NormalFloat = { bg = "#000000" },
-      NormalNC = { bg = "#000000" },
+      Normal = { bg = "NONE" },
+      NormalFloat = { bg = "NONE" },
+      NormalNC = { bg = "NONE" },
       WinSeparator = { fg = colors.surface0 },
     }
   end,
