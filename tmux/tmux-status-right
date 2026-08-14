@@ -14,4 +14,4 @@ cpu=${1##* }
 mem=$(awk -v value="$mem" 'BEGIN { printf "%.0f%%", value }')
 cpu=$(awk -v value="$cpu" 'BEGIN { printf "%.0f%%", value }')
 
-printf ' %s  %s' "$mem" "$cpu"
+printf 'M %s  C %s' "$mem" "$cpu"
